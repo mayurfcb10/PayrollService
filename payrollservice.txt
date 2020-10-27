@@ -145,3 +145,93 @@ mysql> select * from employee_payroll;
 |  4 | Melissa | F      |  800000 | 2020-05-09 |
 |  5 | Sunita  | F      |  100000 | 2020-05-23 |
 +----+---------+--------+---------+------------+
+
+
+mysql> select gender,sum(salary) from employee_payroll where gender = 'F' group
+by gender;
++--------+-------------+
+| gender | sum(salary) |
++--------+-------------+
+| F      |      900000 |
++--------+-------------+
+
+
+mysql> select gender,sum(salary) from employee_payroll where gender = 'M' group
+by gender;
++--------+-------------+
+| gender | sum(salary) |
++--------+-------------+
+| M      |     9000000 |
++--------+-------------+
+
+
+mysql> select name,gender,max(salary) from employee_payroll where gender = 'F' 
+group by gender;
++---------+--------+-------------+
+| name    | gender | max(salary) |
++---------+--------+-------------+
+| Melissa | F      |      800000 |
++---------+--------+-------------+
+
+
+mysql> select name,gender,max(salary) from employee_payroll where gender = 'M' 
+group by gender;
++------+--------+-------------+
+| name | gender | max(salary) |
++------+--------+-------------+
+| Mark | M      |     6000000 |
++------+--------+-------------+
+
+
+mysql> select name,gender,avg(salary) from employee_payroll where gender = 'M' 
+group by gender;
++------+--------+-------------+
+| name | gender | avg(salary) |
++------+--------+-------------+
+| Mark | M      |     3000000 |
++------+--------+-------------+
+
+
+mysql> select name,gender,avg(salary) from employee_payroll where gender = 'F' 
+group by gender;
++---------+--------+-------------+
+| name    | gender | avg(salary) |
++---------+--------+-------------+
+| Melissa | F      |      450000 |
++---------+--------+-------------+
+
+
+mysql> select name,gender,count(salary) from employee_payroll where gender = 'F'
+ group by gender;
++---------+--------+---------------+
+| name    | gender | count(salary) |
++---------+--------+---------------+
+| Melissa | F      |             2 |
++---------+--------+---------------+
+
+
+mysql> select name,gender,count(salary) from employee_payroll where gender = 'M'
+ group by gender;
++------+--------+---------------+
+| name | gender | count(salary) |
++------+--------+---------------+
+| Mark | M      |             3 |
++------+--------+---------------+
+
+
+mysql> select name,gender,min(salary) from employee_payroll where gender = 'F' 
+group by gender;
++---------+--------+-------------+
+| name    | gender | min(salary) |
++---------+--------+-------------+
+| Melissa | F      |      100000 |
++---------+--------+-------------+
+
+
+mysql> select name,gender,min(salary) from employee_payroll where gender = 'M' 
+group by gender;
++------+--------+-------------+
+| name | gender | min(salary) |
++------+--------+-------------+
+| Mark | M      |     1000000 |
++------+--------+-------------+
