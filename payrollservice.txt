@@ -80,3 +80,21 @@ mysql> select * from employee_payroll; 			# retrieve all employee payroll data
 |  4 | Melissa |  800000 | 2020-05-09 |
 |  5 | Sunita  |  100000 | 2020-05-23 |
 +----+---------+---------+------------+
+
+mysql> select salary from employee_payroll where name = 'Jeff';		# selecting Jeff entry
++---------+
+| salary  |
++---------+
+| 2000000 |
++---------+
+
+mysql> select * from employee_payroll where start between cast('2020-05-20' as d
+ate) and date(now());
++----+--------+---------+------------+
+| id | name   | salary  | start      |
++----+--------+---------+------------+
+|  2 | Jeff   | 2000000 | 2020-05-25 |
+|  3 | Bill   | 6000000 | 2020-05-29 |
+|  5 | Sunita |  100000 | 2020-05-23 |
++----+--------+---------+------------+
+
