@@ -1,1 +1,37 @@
 /* Welcome to the payroll service */
+
+ show databases;  				# show databases at start
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| sample             |
+| sys                |
+| world              |
++--------------------+
+
+mysql> CREATE DATABASE payroll_service;          # create database
+
+
+mysql> show databases; 				 # show database 
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sakila             |
+| sample             |
+| sys                |
+| world              |
++--------------------+
+
+
+mysql> use payroll_service;			# use database
+Database changed
