@@ -1,6 +1,6 @@
 /* Welcome to the payroll service */
 
- show databases;  				# show databases at start
+ show databases;  					# show databases at start
 
 +--------------------+
 | Database           |
@@ -14,10 +14,10 @@
 | world              |
 +--------------------+
 
-mysql> CREATE DATABASE payroll_service;          # create database
+mysql> CREATE DATABASE payroll_service;          	# create database
 
 
-mysql> show databases; 				 # show database 
+mysql> show databases; 					 # show database 
 
 +--------------------+
 | Database           |
@@ -33,5 +33,21 @@ mysql> show databases; 				 # show database
 +--------------------+
 
 
-mysql> use payroll_service;			# use database
-Database changed
+mysql> use payroll_service;				# use database
+Database changed			
+
+mysql> select database();
++-----------------+
+| database()      |
++-----------------+
+| payroll_service |
++-----------------+
+
+mysql> create table employee_payroll
+    -> (
+    -> id       INT unsigned not null AUTO_INCREMENT,   # uniqueid for record
+    -> name     varchar(150) not null,			# name of the employee
+    -> salary   double not null,			# Employee Salary
+    -> start    date not null,				# Employee Start Date
+    -> primary  key (id)				# make id primary key
+    -> );
