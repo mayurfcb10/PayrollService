@@ -51,3 +51,22 @@ mysql> create table employee_payroll
     -> start    date not null,				# Employee Start Date
     -> primary  key (id)				# make id primary key
     -> );
+
+mysql> desc employee_payroll; 				# describe table
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+
+mysql> insert into employee_payroll (name, salary, start) values	# insert operation
+    -> ('Mark', 1000000.00, '2020-05-18'),
+    -> ('Jeff', 2000000.00, '2020-05-25'),
+    -> ('Bill', 6000000.00, '2020-05-29'),
+    -> ('Melissa', 800000.00, '2020-05-09'),
+    -> ('Sunita', 100000.00, '2020-05-23');
+
+
