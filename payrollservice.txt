@@ -98,3 +98,50 @@ ate) and date(now());
 |  5 | Sunita |  100000 | 2020-05-23 |
 +----+--------+---------+------------+
 
+
+mysql> alter table employee_payroll add gender char(1) after name;      # adding gender field
+
+
+mysql> update employee_payroll
+    -> set gender = 'M'
+    -> where name = 'Jeff' or name = 'Mark' or name = 'Bill';
+
+
+mysql> desc employee_payroll;
++--------+--------------+------+-----+---------+----------------+
+| Field  | Type         | Null | Key | Default | Extra          |
++--------+--------------+------+-----+---------+----------------+
+| id     | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(150) | NO   |     | NULL    |                |
+| gender | char(1)      | YES  |     | NULL    |                |
+| salary | double       | NO   |     | NULL    |                |
+| start  | date         | NO   |     | NULL    |                |
++--------+--------------+------+-----+---------+----------------+
+
+mysql> select * from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Mark    | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | NULL   |  800000 | 2020-05-09 |
+|  5 | Sunita  | NULL   |  100000 | 2020-05-23 |
++----+---------+--------+---------+------------+
+5 rows in set (0.00 sec)
+
+mysql> update employee_payroll
+    -> set gender = 'F'
+    -> where name = 'Melissa' or
+    -> name ='Sunita';
+
+mysql> select * from employee_payroll;
++----+---------+--------+---------+------------+
+| id | name    | gender | salary  | start      |
++----+---------+--------+---------+------------+
+|  1 | Mark    | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | F      |  800000 | 2020-05-09 |
+|  5 | Sunita  | F      |  100000 | 2020-05-23 |
++----+---------+--------+---------+------------+
