@@ -14,6 +14,8 @@
 | world              |
 +--------------------+
 
+#1 UC1 Create Database
+
 mysql> CREATE DATABASE payroll_service;          	# create database
 
 
@@ -43,6 +45,8 @@ mysql> select database();
 | payroll_service |
 +-----------------+
 
+# UC2 Create table 
+
 mysql> create table employee_payroll
     -> (
     -> id       INT unsigned not null AUTO_INCREMENT,   # uniqueid for record
@@ -63,12 +67,16 @@ mysql> desc employee_payroll; 				# describe table
 | start  | date         | NO   |     | NULL    |                |
 +--------+--------------+------+-----+---------+----------------+
 
+# UC3 Insert Data in table
+
 mysql> insert into employee_payroll (name, salary, start) values	# insert operation
     -> ('Mark', 1000000.00, '2020-05-18'),
     -> ('Jeff', 2000000.00, '2020-05-25'),
     -> ('Bill', 6000000.00, '2020-05-29'),
     -> ('Melissa', 800000.00, '2020-05-09'),
     -> ('Sunita', 100000.00, '2020-05-23');
+
+# UC4 Retrieve Employee Payroll Data
 
 mysql> select * from employee_payroll; 			# retrieve all employee payroll data
 +----+---------+---------+------------+
@@ -80,6 +88,8 @@ mysql> select * from employee_payroll; 			# retrieve all employee payroll data
 |  4 | Melissa |  800000 | 2020-05-09 |
 |  5 | Sunita  |  100000 | 2020-05-23 |
 +----+---------+---------+------------+
+
+# UC5 Retrieve Salary by name
 
 mysql> select salary from employee_payroll where name = 'Jeff';		# selecting Jeff entry
 +---------+
@@ -130,6 +140,7 @@ mysql> select * from employee_payroll;
 +----+---------+--------+---------+------------+
 5 rows in set (0.00 sec)
 
+# UC6 Update gender of the employee in Payroll table 
 mysql> update employee_payroll
     -> set gender = 'F'
     -> where name = 'Melissa' or
@@ -146,6 +157,7 @@ mysql> select * from employee_payroll;
 |  5 | Sunita  | F      |  100000 | 2020-05-23 |
 +----+---------+--------+---------+------------+
 
+# UC7 Find sum average min max 
 
 mysql> select gender,sum(salary) from employee_payroll where gender = 'F' group
 by gender;
@@ -235,3 +247,72 @@ group by gender;
 +------+--------+-------------+
 | Mark | M      |     1000000 |
 +------+--------+-------------+
+
+
+# UC8 Extended Employee Payroll Data to Store employee information phone department and address
+
+mysql> alter table employee_payroll add phonenumber varchar(15) after name;
+
+mysql> select * from employee_payroll;
++----+---------+-------------+--------+---------+------------+
+| id | name    | phonenumber | gender | salary  | start      |
++----+---------+-------------+--------+---------+------------+
+|  1 | Mark    | NULL        | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | NULL        | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | NULL        | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | NULL        | F      |  800000 | 2020-05-09 |
+|  5 | Sunita  | NULL        | F      |  100000 | 2020-05-23 |
++----+---------+-------------+--------+---------+------------+
+
+mysql> alter table employee_payroll add address varchar(250) after phonenumber;
+
+mysql> select * from employee_payroll;
++----+---------+-------------+---------+--------+---------+------------+
+| id | name    | phonenumber | address | gender | salary  | start      |
++----+---------+-------------+---------+--------+---------+------------+
+|  1 | Mark    | NULL        | NULL    | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | NULL        | NULL    | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | NULL        | NULL    | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | NULL        | NULL    | F      |  800000 | 2020-05-09 |
+|  5 | Sunita  | NULL        | NULL    | F      |  100000 | 2020-05-23 |
++----+---------+-------------+---------+--------+---------+------------+
+
+mysql> alter table employee_payroll add department varchar(150) not null after address ;
+
+mysql> select * from employee_payroll;
++----+---------+-------------+---------+------------+--------+---------+------------+
+| id | name    | phonenumber | address | department | gender | salary  | start      |
++----+---------+-------------+---------+------------+--------+---------+------------+
+|  1 | Mark    | NULL        | NULL    |            | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | NULL        | NULL    |            | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | NULL        | NULL    |            | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | NULL        | NULL    |            | F      |  800000 | 2020-05-09 |
+|  5 | Sunita  | NULL        | NULL    |            | F      |  100000 | 2020-05-23 |
++----+---------+-------------+---------+------------+--------+---------+------------+
+
+mysql> alter table employee_payroll alter address set default 'TBD';
+
+mysql> select * from employee_payroll;
++----+---------+-------------+---------+------------+--------+---------+------------+
+| id | name    | phonenumber | address | department | gender | salary  | start	    |
++----+---------+-------------+---------+------------+--------+---------+------------+
+|  1 | Mark    | NULL        | NULL    |            | M      | 1000000 | 2020-05-18 |
+|  2 | Jeff    | NULL        | NULL    |            | M      | 2000000 | 2020-05-25 |
+|  3 | Bill    | NULL        | NULL    |            | M      | 6000000 | 2020-05-29 |
+|  4 | Melissa | NULL        | NULL    |            | F      |  800000 | 2020-05-09 |
+|  5 | Sunita  | NULL        | NULL    |            | F      |  100000 | 2020-05-23 |
++----+---------+-------------+---------+------------+--------+---------+------------+
+
+mysql> desc employee_payroll;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| id          | int unsigned | NO   | PRI | NULL    | auto_increment |
+| name        | varchar(150) | NO   |     | NULL    |                |
+| phonenumber | varchar(15)  | YES  |     | NULL    |                |
+| address     | varchar(250) | YES  |     | TBD     |                |
+| department  | varchar(150) | NO   |     | NULL    |                |
+| gender      | char(1)      | YES  |     | NULL    |                |
+| salary      | double       | NO   |     | NULL    |                |
+| start       | date         | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
