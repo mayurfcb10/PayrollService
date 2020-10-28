@@ -356,3 +356,31 @@ mysql> select * from employee_payroll;
 |  5 | Sunita  | NULL        | NULL    |            | F      |    100000 |          0 |           0 |   0 |       0 | 2020-05-23 |
 |  6 | Mayur   | NULL        | TBD     | Electrical | NULL   |    100000 |          0 |           0 |   0 |       0 | 2020-09-18 |
 +----+---------+-------------+---------+------------+--------+-----------+------------+-------------+-----+---------+------------+
+
+# UC 10 Sunita as a part of Sales and Marketting Department
+
+mysql> update employee_payroll set department = 'sales' where start ='2020-05-23';
+
+mysql> insert into employee_payroll (name,department,gender,basic_pay, deductions, taxable_pay, tax, net_pay, start) values
+    -> ('Sunita','Marketting', 'F', 3000000.00, 1000000.00, 2000000.00,500000.00,150000.00,'2020-05-28');
+
+mysql> select * from employee_payroll;
++----+---------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+| id | name    | phonenumber | address | department | gender | basic_pay | deductions | taxable_pay | tax    | net_pay | start      |
++----+---------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+|  1 | Mark    | NULL        | NULL    |            | M      |   1000000 |   	    0 |           0 |      0 |       0 | 2020-05-18 |
+|  2 | Jeff    | NULL        | NULL    |            | M      |   2000000 |    	    0 |           0 |      0 |       0 | 2020-05-25 |
+|  3 | Bill    | NULL        | NULL    |            | M      |   6000000 |    	    0 |           0 |      0 |       0 | 2020-05-29 |
+|  4 | Melissa | NULL        | NULL    | Sales      | F      |    800000 |          0 |           0 |      0 |       0 | 2020-05-09 |
+|  5 | Sunita  | NULL        | NULL    | sales      | F      |    100000 |    	    0 |           0 |      0 |       0 | 2020-05-23 |
+|  6 | Mayur   | NULL        | TBD     | Electrical | NULL   |    100000 |  	    0 |           0 |      0 |       0 | 2020-09-18 |
+|  7 | Sunita  | NULL        | TBD     | Marketting | F      |   3000000 |    1000000 |     2000000 | 500000 |  150000 | 2020-05-28 |
++----+---------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+
+mysql> select * from employee_payroll where name = 'Sunita';
++----+--------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+| id | name   | phonenumber | address | department | gender | basic_pay | deductions | taxable_pay | tax    | net_pay | start      |
++----+--------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
+|  5 | Sunita | NULL        | NULL    | sales      | F      |    100000 |   0 |           0 |      0 |       0 | 2020-05-23 |
+|  7 | Sunita | NULL        | TBD     | Marketting | F      |   3000000 |    1000000 |     2000000 | 500000 |  150000 | 2020-05-28 |
++----+--------+-------------+---------+------------+--------+-----------+------------+-------------+--------+---------+------------+
