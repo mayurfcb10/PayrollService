@@ -458,6 +458,80 @@ mysql> show tables;
 | payroll                  |
 +--------------------------+
 
+# UC12 Insert and Retrieve
+
+#12 Insert Operation
+
+mysql> insert into employee_details(name,company_id,phone_number,address,gender,
+	start) values ('Mark',1,'7959959695','mg road','M','2018-05-01'),
+    	-> ('Terissa',1,'9896656343','nehru road','F','2018-05-29');
+
+mysql> insert into payroll(emp_id, basic_pay,deductions,taxable_pay,tax,net_pay)
+   	 -> values (1,50000,1000,20000,2000,30000),
+    	-> (2,70000,2000,25000,5000,45000);
+
+mysql> insert into department (dept_id, dep_name) values
+    -> (101,'Sales'),
+    -> (202,'Marketing'),
+    -> (303,'HR');
+
+mysql> insert into employee_department (emp_id,dept_id) values
+    -> (1,101),
+    -> (2,101),
+    -> (2,102);
 
 
+Retireval Operation 
+
+mysql> select sum(p.net_pay), e.gender from employee_details e left join payroll
+ p on p.emp_id = e.emp_id group by e.gender;
+
++----------------+--------+
+| sum(p.net_pay) | gender |
++----------------+--------+
+|          30000 | M      |
+|          45000 | F      |
++----------------+--------+
+
+
+mysql> select avg(p.net_pay), e.gender from employee_details e left join payroll
+ p on p.emp_id = e.emp_id group by e.gender;
+
++----------------+--------+
+| avg(p.net_pay) | gender |
++----------------+--------+
+|          30000 | M      |
+|          45000 | F      |
++----------------+--------+
+
+
+mysql> select min(p.net_pay), e.gender from employee_details e left join payroll
+ p on p.emp_id = e.emp_id group by e.gender;
+
++----------------+--------+
+| min(p.net_pay) | gender |
++----------------+--------+
+|          30000 | M      |
+|          45000 | F      |
++----------------+--------+
+
+mysql> select max(p.net_pay), e.gender from employee_details e left join payroll
+ p on p.emp_id = e.emp_id group by e.gender;
+
++----------------+--------+
+| max(p.net_pay) | gender |
++----------------+--------+
+|          30000 | M      |
+|          45000 | F      |
++----------------+--------+
+
+mysql> select count(p.net_pay), e.gender from employee_details e left join payro
+ll p on p.emp_id = e.emp_id group by e.gender; 
+
++------------------+--------+
+| count(p.net_pay) | gender |
++------------------+--------+
+|                1 | M      |
+|                1 | F      |
++------------------+--------+
 
